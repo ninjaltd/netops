@@ -1,0 +1,32 @@
+<%= turbo_frame_tag :hosts_table do %>
+  <%= render "shared/filter_form", url: network_hosts_path, filters: NetworkHost.filter_options, frame: "hosts_table" %>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <%= sortable_header :hostname, "Hostname", frame: "hosts_table" %>
+          <%= sortable_header :design_name, "Design name", frame: "hosts_table" %>
+          <%= sortable_header :location, "Location", frame: "hosts_table" %>
+          <%= sortable_header :role, "Role", frame: "hosts_table" %>
+          <th>Status</th>
+          <%= sortable_header :ip_address, "IP address", frame: "hosts_table" %>
+          <th>VLAN</th>
+          <%= sortable_header :vendor, "Vendor", frame: "hosts_table" %>
+          <th class="actions-cell"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @network_hosts.empty? %>
+          <tr class="empty-row">
+            <td colspan="9">No hosts match these filters.</td>
+          </tr>
+        <% else %>
+          <%= render @network_hosts %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= render "shared/pagination", frame: "hosts_table" %>
+<% end %>

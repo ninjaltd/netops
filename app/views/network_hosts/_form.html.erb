@@ -1,0 +1,82 @@
+<%= form_with model: @network_host, class: "form-card" do |f| %>
+  <% if @network_host.errors.any? %>
+    <div class="form-errors">
+      <p><%= pluralize(@network_host.errors.count, "error") %> prevented this host from being saved:</p>
+      <ul>
+        <% @network_host.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Identity</legend>
+    <div class="field">
+      <%= f.label :hostname %>
+      <%= f.text_field :hostname, class: "text-field mono", placeholder: "hq-sw-01" %>
+    </div>
+    <div class="field">
+      <%= f.label :design_name, "Design name" %>
+      <%= f.text_field :design_name, class: "text-field", placeholder: "HQ core switch 1" %>
+    </div>
+    <div class="field">
+      <%= f.label :role %>
+      <%= f.select :role, NetworkHost.roles.keys.map { |role| [role.humanize, role] }, class: "select" %>
+    </div>
+    <div class="field">
+      <%= f.label :status %>
+      <%= f.select :status, NetworkHost.statuses.keys.map { |status| [status.humanize, status] }, class: "select" %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Network</legend>
+    <div class="field">
+      <%= f.label :ip_address, "IP address" %>
+      <%= f.text_field :ip_address, class: "text-field mono", placeholder: "10.0.0.2" %>
+    </div>
+    <div class="field">
+      <%= f.label :mac_address, "MAC address" %>
+      <%= f.text_field :mac_address, class: "text-field mono", placeholder: "AA:BB:CC:DD:EE:FF" %>
+    </div>
+    <div class="field">
+      <%= f.label :vlan_id, "VLAN" %>
+      <%= f.number_field :vlan_id, class: "text-field", min: 1, max: 4094 %>
+    </div>
+    <div class="field">
+      <%= f.label :subnet %>
+      <%= f.text_field :subnet, class: "text-field mono", placeholder: "10.0.0.0/24" %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Hardware &amp; placement</legend>
+    <div class="field">
+      <%= f.label :vendor %>
+      <%= f.text_field :vendor, class: "text-field", placeholder: "Cisco" %>
+    </div>
+    <div class="field">
+      <%= f.label :model %>
+      <%= f.text_field :model, class: "text-field", placeholder: "Catalyst 9300-48T" %>
+    </div>
+    <div class="field">
+      <%= f.label :serial_number, "Serial number" %>
+      <%= f.text_field :serial_number, class: "text-field mono" %>
+    </div>
+    <div class="field">
+      <%= f.label :location %>
+      <%= f.text_field :location, class: "text-field", placeholder: "HQ — Rack A" %>
+    </div>
+    <div class="field field-full">
+      <%= f.label :notes %>
+      <%= f.text_area :notes, class: "text-field", rows: 4, placeholder: "Design notes, cabling, licensing…" %>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <%= f.submit class: "button" %>
+    <%= link_to "Cancel", @network_host.persisted? ? network_host_path(@network_host) : network_hosts_path,
+          class: "button button-quiet", data: { turbo_frame: "_top" } %>
+  </div>
+<% end %>

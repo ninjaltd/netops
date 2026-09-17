@@ -1,0 +1,69 @@
+# Read about fixtures at https://guides.rubyonrails.org/active_record_fixtures.html
+
+hq_core_switch:
+  hostname: hq-sw-01
+  design_name: HQ core switch
+  location: HQ — Rack A
+  role: switch
+  status: online
+  ip_address: 10.0.0.11
+  mac_address: AA:BB:CC:DD:EE:01
+  vlan_id: 11
+  subnet: 10.0.0.0/24
+  vendor: Cisco
+  model: Catalyst 9300-48T
+  serial_number: SN-CISCO-000001
+  notes: Core switch
+  created_at: 2026-01-01 09:00:00
+  updated_at: 2026-01-01 09:00:00
+
+hq_border_firewall:
+  hostname: hq-fw-01
+  design_name: HQ border firewall
+  location: HQ — Rack A
+  role: firewall
+  status: online
+  ip_address: 10.0.0.12
+  mac_address: AA:BB:CC:DD:EE:02
+  vlan_id: 12
+  subnet: 10.0.0.0/24
+  vendor: Fortinet
+  model: FortiGate 100F
+  serial_number: SN-FORTINET-000002
+  notes: Border
+  created_at: 2026-02-01 09:00:00
+  updated_at: 2026-02-01 09:00:00
+
+atl_branch_switch:
+  hostname: atl-sw-01
+  design_name: Atlanta branch switch
+  location: Atlanta — Branch 2
+  role: switch
+  status: offline
+  ip_address: 10.0.1.11
+  mac_address: AA:BB:CC:DD:EE:03
+  vlan_id: 11
+  subnet: 10.0.1.0/24
+  vendor: Cisco
+  model: Catalyst 9300-48T
+  serial_number: SN-CISCO-000003
+  notes: Branch
+  created_at: 2026-03-01 09:00:00
+  updated_at: 2026-03-01 09:00:00
+
+denver_workstation:
+  hostname: denver-ws-01
+  design_name: Denver office PC
+  location: Denver — Branch 4
+  role: workstation
+  status: maintenance
+  ip_address: 10.0.3.21
+  mac_address: aa:bb:cc:dd:ee:04
+  vlan_id: 21
+  subnet: 10.0.3.0/24
+  vendor: Dell
+  model: OptiPlex 7010
+  serial_number: SN-DELL-000004
+  notes: Office PC
+  created_at: 2026-04-01 09:00:00
+  updated_at: 2026-04-01 09:00:00

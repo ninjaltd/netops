@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Netops" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Netops">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="site-nav">
+      <span class="site-brand"><%= link_to "Netops", root_path %></span>
+      <span class="site-links">
+        <%= link_to "Network hosts", network_hosts_path %>
+        <%= link_to "Add host", new_network_host_path %>
+      </span>
+    </nav>
+
+    <%# Target of the TurboStream flash (see the TurboFlash concern). %>
+    <div id="flash">
+      <%= render "shared/flash" %>
+    </div>
+
+    <main class="container">
+      <%= yield %>
+    </main>
+  </body>
+</html>

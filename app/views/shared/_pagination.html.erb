@@ -1,0 +1,21 @@
+<%# Shared pagination footer. Works with any relation passed through the
+  Paginatable controller concern (page_number, per_page, total_count, …).
+%>
+<%# locals: (frame:) %>
+<% if total_count.positive? %>
+  <nav class="pagination">
+    <span class="pagination-info"><%= page_entries_info %> · Page <%= page_number %> of <%= total_pages %></span>
+
+    <span class="pagination-pages">
+      <% if page_number > 1 %>
+        <%= link_to "← Previous", url_for(request.query_parameters.merge(page: page_number - 1)),
+              class: "button button-quiet", data: { turbo_frame: frame, turbo_action: "advance" } %>
+      <% end %>
+
+      <% if has_more_pages? %>
+        <%= link_to "Next →", url_for(request.query_parameters.merge(page: page_number + 1)),
+              class: "button button-quiet", data: { turbo_frame: frame, turbo_action: "advance" } %>
+      <% end %>
+    </span>
+  </nav>
+<% end %>

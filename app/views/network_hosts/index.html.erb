@@ -1,0 +1,19 @@
+<% if turbo_frame_request? %>
+  <%# Requested by the #hosts_table frame: respond with just the frame. %>
+  <%= render "table" %>
+<% else %>
+  <header class="page-header">
+    <div>
+      <h1>Network hosts</h1>
+      <p class="subtitle">Design and manage the hosts across your business locations.</p>
+    </div>
+    <%= link_to "Add host", new_network_host_path, class: "button" %>
+  </header>
+
+  <%# The table lazy-loads into this frame and re-renders only itself for
+    sorting, filtering and pagination. data-turbo-action promotes those frame
+    navigations to page visits so the URL stays shareable. %>
+  <%= turbo_frame_tag :hosts_table, src: network_hosts_path, data: { turbo_action: "advance" } do %>
+    <p class="frame-loading">Loading hosts…</p>
+  <% end %>
+<% end %>

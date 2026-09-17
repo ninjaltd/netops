@@ -1,0 +1,26 @@
+<tr id="<%= dom_id(network_host) %>">
+  <td class="hostname-cell">
+    <%= link_to network_host.hostname, network_host_path(network_host), data: { turbo_frame: "_top" } %>
+  </td>
+  <td><%= network_host.design_name %></td>
+  <td><%= network_host.location %></td>
+  <td><%= network_host.role.humanize %></td>
+  <td>
+    <%# In-place status change: the form is inside the #hosts_table frame, so
+      the update is answered with a Turbo Stream that replaces just this row. %>
+    <%= form_with model: network_host, class: "inline-form", data: { turbo_frame: "hosts_table" } do %>
+      <%= select_tag "network_host[status]",
+            options_for_select(NetworkHost.statuses.keys.map { |status| [status.humanize, status] }, network_host.status),
+            class: "select status-select status-#{network_host.status}" %>
+    <% end %>
+  </td>
+  <td class="mono"><%= network_host.ip_address.presence || "—" %></td>
+  <td class="mono"><%= network_host.vlan_id.presence || "—" %></td>
+  <td><%= network_host.vendor.presence || "—" %></td>
+  <td class="actions-cell">
+    <%= link_to "Edit", edit_network_host_path(network_host), class: "button button-quiet", data: { turbo_frame: "_top" } %>
+    <%= button_to "Delete", network_host_path(network_host), method: :delete,
+          class: "button button-quiet danger",
+          data: { turbo_frame: "hosts_table", turbo_confirm: "Remove #{network_host.hostname} from the inventory?" } %>
+  </td>
+</tr>

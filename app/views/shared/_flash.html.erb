@@ -1,0 +1,5 @@
+<%# locals: (flash:) — a hash of flash type => message, e.g. { notice: "…" } %>
+<% (flash || {}).each do |type, message| %>
+  <% next if message.blank? %>
+  <div class="flash flash-<%= type %>"><%= message %></div>
+<% end %>

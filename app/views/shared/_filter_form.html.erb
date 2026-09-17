@@ -1,0 +1,27 @@
+<%# Shared filter form. Any model that provides `filter_options` (see the
+  Filterable concern) gets a working filter bar by rendering this partial:
+    render "shared/filter_form", url: ..., filters: Model.filter_options, frame: "..."
+%>
+<%# locals: (url:, filters:, frame:) %>
+<%= form_with url: url, method: :get, class: "filter-form", data: { turbo_frame: frame } do %>
+  <div class="filter-fields">
+    <% filters.each do |name, config| %>
+      <% value = params[name].presence %>
+      <label class="filter-field">
+        <span><%= config[:label] %></span>
+        <% if config[:input] == :select %>
+          <%= select_tag name,
+                options_for_select(config[:options].map { |option| [option.humanize, option] }, value),
+                include_blank: "Any", class: "select" %>
+        <% else %>
+          <%= text_field_tag name, value, placeholder: "#{config[:label]}…", class: "text-field" %>
+        <% end %>
+      </label>
+    <% end %>
+  </div>
+
+  <div class="filter-actions">
+    <button type="submit" class="button">Apply</button>
+    <%= link_to "Reset", url, class: "button button-quiet", data: { turbo_frame: frame } %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<header class="page-header">
+  <div>
+    <h1>Edit <%= @network_host.hostname %></h1>
+    <p class="subtitle">Update the design and inventory details.</p>
+  </div>
+</header>
+
+<%= render "form" %>
+
+<p><%= link_to "← Back to all hosts", network_hosts_path, data: { turbo_frame: "_top" } %></p>

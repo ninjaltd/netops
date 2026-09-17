@@ -1,0 +1,40 @@
+<div class="hero">
+  <h1>Netops</h1>
+  <p class="hero-lede">
+    A small network-design demo: one model, <code>NetworkHost</code>, and the
+    full table experience — filtering, column sorting and pagination — built
+    with plain Rails and <a href="https://turbo.hotwired.dev">Turbo Frames</a>.
+  </p>
+  <p class="hero-actions">
+    <%= link_to "Browse the host inventory", network_hosts_path, class: "button" %>
+    <%= link_to "Add a host", new_network_host_path, class: "button button-quiet" %>
+  </p>
+</div>
+
+<div class="feature-grid">
+  <div class="feature">
+    <h2>Turbo Frames</h2>
+    <p>
+      The index table lives inside a <code>&lt;turbo-frame&gt;</code>. Sorting,
+      filtering, pagination, row deletes and in-row status changes all replace
+      just the frame — no full-page reloads, no JavaScript.
+    </p>
+  </div>
+  <div class="feature">
+    <h2>Turbo Streams</h2>
+    <p>
+      Actions that originate from inside the frame answer with
+      <code>turbo_stream</code> responses: the changed row is updated or
+      removed in place and the flash message streams in.
+    </p>
+  </div>
+  <div class="feature">
+    <h2>Reusable concerns</h2>
+    <p>
+      <code>Filterable</code> and <code>Sortable</code> model concerns,
+      <code>Paginatable</code> and <code>TurboFlash</code> controller
+      concerns, plus shared filter/pagination partials — any future model
+      (Locations, Vlans, …) gets the same table for free.
+    </p>
+  </div>
+</div>

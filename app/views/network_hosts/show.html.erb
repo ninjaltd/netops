@@ -1,0 +1,46 @@
+<header class="page-header">
+  <div>
+    <h1><%= @network_host.hostname %></h1>
+    <p class="subtitle"><%= @network_host.design_name %> · <%= @network_host.location %></p>
+  </div>
+  <div class="header-actions">
+    <%= link_to "Edit", edit_network_host_path(@network_host), class: "button" %>
+    <%= button_to "Delete", network_host_path(@network_host), method: :delete,
+          class: "button danger",
+          data: { turbo_confirm: "Remove #{@network_host.hostname} from the inventory?" } %>
+  </div>
+</header>
+
+<dl class="detail-grid">
+  <div class="detail-group">
+    <h2>Identity</h2>
+    <dt>Hostname</dt><dd><%= @network_host.hostname %></dd>
+    <dt>Design name</dt><dd><%= @network_host.design_name %></dd>
+    <dt>Role</dt><dd><%= @network_host.role.humanize %></dd>
+    <dt>Status</dt><dd><span class="status-badge status-<%= @network_host.status %>"><%= @network_host.status.humanize %></span></dd>
+  </div>
+
+  <div class="detail-group">
+    <h2>Network</h2>
+    <dt>IP address</dt><dd class="mono"><%= @network_host.ip_address.presence || "—" %></dd>
+    <dt>MAC address</dt><dd class="mono"><%= @network_host.mac_address.presence || "—" %></dd>
+    <dt>VLAN</dt><dd><%= @network_host.vlan_id.presence || "—" %></dd>
+    <dt>Subnet</dt><dd class="mono"><%= @network_host.subnet.presence || "—" %></dd>
+  </div>
+
+  <div class="detail-group">
+    <h2>Hardware</h2>
+    <dt>Vendor</dt><dd><%= @network_host.vendor.presence || "—" %></dd>
+    <dt>Model</dt><dd><%= @network_host.model.presence || "—" %></dd>
+    <dt>Serial number</dt><dd class="mono"><%= @network_host.serial_number.presence || "—" %></dd>
+  </div>
+
+  <div class="detail-group">
+    <h2>Placement &amp; notes</h2>
+    <dt>Location</dt><dd><%= @network_host.location %></dd>
+    <dt>Notes</dt><dd><%= @network_host.notes.presence || "—" %></dd>
+    <dt>Added</dt><dd><%= @network_host.created_at.strftime("%d %b %Y") %></dd>
+  </div>
+</dl>
+
+<p><%= link_to "← Back to all hosts", network_hosts_path, data: { turbo_frame: "_top" } %></p>
